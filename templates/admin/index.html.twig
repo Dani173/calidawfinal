@@ -3,16 +3,20 @@
 {% block title %}Hola AdminController!{% endblock %}
 
 {% block body %}
+    <div class="rutinabloque">
+    <div style="color:white;">
     {% if is_granted('ROLE_ADMIN') %}
         <h1 align="center">Administración de usuarios</h1><a class="btn btn-info create-user" href="{{ path('app_create') }}">Crear usuario</a><br>
         <div align="center" class="centro">
         {% for user in users %}
-            <a href="/admin/{{ user.id }}">{{ user.email }}</a>
-            <a class="btn btn-dark edit-user" href="/admin/edit/{{ user.id }}">Editar</a>
-            <a class="btn btn-danger delete-user" data-id="{{
-            user.id}}">Eliminar usuario:{{ user.id }}</a><br>
+            <a class="nygga" href="/admin/{{ user.id }}">{{ user.email }}</a>
+            <a class="btn btn-dark edit-user nygga" href="/admin/edit/{{ user.id }}">Editar</a>
+            <a class="btn btn-danger delete-user nygga" href="{{ path('app_user_delete',{'id':user.id} )}}" data-id="{{
+            user.id}}"> Eliminar usuario: {{ user.id }}</a><br>
         {% endfor %}
     {% endif %}
+    </div>
+    </div>
     </div>
 {% endblock %}
 {% block javascripts %}

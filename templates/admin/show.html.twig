@@ -4,7 +4,8 @@
 
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
-        <h1>{{ user.email }}/h1>
+        <h1 style="color: white;text-align: center;">Usuario registrado como: {{ user.username }}</h1>
+
 
     {% endif %}
 

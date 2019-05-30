@@ -92,7 +92,7 @@ WHERE id = $user;
         $em = $this->getDoctrine()->getEntityManager();
         $db = $em->getConnection();
 
-        $query = "select exercise.name,exercise.series,exercise.repetitions
+        $query = "select exercise.name,exercise.series,exercise.repetitions,exercise.multimedia
 FROM routine
 INNER JOIN exercise_routine
 ON routine.id = exercise_routine.routine_id

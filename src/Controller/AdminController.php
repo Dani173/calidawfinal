@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Form\AdminUserType;
 use App\Form\UserType;
+use App\Form\UserEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -38,7 +38,7 @@ class AdminController extends AbstractController
     {
         $user = new User();
         $user->setIsActive(true);
-        $form = $this->createForm(AdminUserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
         $error = $form->getErrors();
@@ -82,7 +82,7 @@ class AdminController extends AbstractController
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
 
-        $form = $this->createForm(AdminUserType::class, $user);
+        $form = $this->createForm(UserEditType::class, $user);
 
         $form->handleRequest($request);
         $error = $form->getErrors();
@@ -110,24 +110,14 @@ class AdminController extends AbstractController
 }
 
     /**
-     * @Route("/admin/delete/{id}")
-     * @Method({"DELETE"})
+     * @Route("admin/user/{id}/delete", name="app_user_delete")
      */
-    public function delete(Request $request, $id){
-
+    public function deleteUser($id)
+    {
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($user);
-        $entityManager->flush();
-
-        $response = new Response();
-        $response->send();
-
-        $users=$this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('admin/index.html.twig',[
-            'users'=>$users]);
-
-
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute('app_admin');
     }
 }

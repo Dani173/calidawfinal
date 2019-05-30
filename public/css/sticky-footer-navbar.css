@@ -849,7 +849,7 @@ fieldset.radioEmpty input:focus{
 }
 
 .rutinasub{
-    color: white;
+    color: black;
     text-decoration: none;
 
 }
@@ -959,7 +959,7 @@ fieldset.radioEmpty input:focus{
     color: black;
     text-decoration: none;
     font-size: 25px;
-    font-weight: 900 bold;
+    font-weight: 900;
     margin-left: 150px;
 
 
@@ -987,6 +987,14 @@ fieldset.radioEmpty input:focus{
 
 }
 
+.retoque {
+    text-decoration: none;
+    color: black;
+}
+
+.rojo {
+    Color: #CC3B3B;
+}
 .containerej {
     float: left;
     margin-left: 50px;
@@ -1016,4 +1024,10 @@ fieldset.radioEmpty input:focus{
 
 
 }
+
+.nygga  {
+    color: black;
+    text-decoration: none;
+}
+
 

@@ -6,6 +6,9 @@
 <div class="datos">
     <a class="datos1" href="{{ path('app_perfil_cambiar',{'id':app.user.id} )}}">Configurar mis datos</a>
     <a  class="datos2" href="{{ path('app_mostrar_fav',{'id':app.user.id} )}}">Mis Rutinas</a>
+    {% if is_granted("ROLE_ADMIN") %}
+    <a  class="datos2" href="{{ path('app_admin' )}}">Admin</a>
+{% endif %}
 </div>
     <a></a>
 {% endblock %}

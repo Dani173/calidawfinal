@@ -5,20 +5,19 @@
 {% block body %}
 
 
-
+    <div class="retobloque">
 
     {% for level in levels %}
 
         {% if app.user is null %}
-            <a href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1></a>
+            <a  class="retoque" href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1></a>
         {% else %}
-            <a href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1><a href="{{ path('app_del',{'id':level.id,'user':app.user.id})}}">X</a></a>
+            <a class="retoque" href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1><a class="rojo" href="{{ path('app_del',{'id':level.id,'user':app.user.id})}}">Eliminar</a></a>
 
         {% endif %}
         </div>
 
     {% endfor %}
-
 
 
 
