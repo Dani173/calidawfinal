@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ExerciseController!{% endblock %}
+
+{% block body %}
+
+
+
+
+    {% for level in levels %}
+        <div class="containerex">
+            <img src="/Imagenes/EJercicios/fondoejercicio.png" class="imgex">
+
+            {% if app.user is null %}
+
+                <div class="textoencima"> <a class="letrasex" href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1></a></div>
+
+            {% else %}
+                <div class="textoencima"> <a class="letrasex" href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1><a href="{{ path('app_del',{'id':level.id,'user':app.user.id})}}"> <img src="/Imagenes/Fav/fav.png" id="favimg"> </a></a></div>
+
+            {% endif %}
+        </div>
+
+    {% endfor %}
+
+
+
+
+
+{% endblock %}

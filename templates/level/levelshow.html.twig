@@ -8,13 +8,20 @@
 
 
     {% for level in levels %}
+        <div class="containerej">
+            <img src="/Imagenes/EJercicios/fondoejercicio.png" class="imgex">
+            <div class="textoencima2">
 
-        {% if app.user is null %}
-        <a href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1></a>
-{% else %}
-    <a href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1><a href="{{ path('addFav',{'id':level.id,'user':app.user.id})}}">fav</a></a>
+                {% if app.user is null %}
 
-        {% endif %}
+
+                <a class="letrasex" href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1></a>
+                {% else %}
+
+                <a class="letrasex" href="{{ path('routine_exercises',{'id':level.id} )}}"><h1>{{ level.name}}</h1><a href="{{ path('addFav',{'id':level.id,'user':app.user.id})}}"><img src="/Imagenes/Fav/fav.png" id="favimg"></a></a>
+
+            </div>
+            {% endif %}
         </div>
 
     {% endfor %}

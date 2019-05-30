@@ -31,7 +31,7 @@ class Level
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="level")
      */
-    private $user;
+    private $users;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Routine", mappedBy="level")
@@ -40,7 +40,7 @@ class Level
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->routine = new ArrayCollection();
     }
 
@@ -76,9 +76,9 @@ class Level
     /**
      * @return Collection|User[]
      */
-    public function getUser(): Collection
+    public function getUsers(): ?Collection
     {
-        return $this->user;
+        return $this->users;
     }
 
     public function addUser(User $user): self

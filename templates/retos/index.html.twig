@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RetosController2!{% endblock %}
+
+{% block body %}
+
+    <p id="subtitulo">Retos filtrados por categoria</p>
+    {% for level in levels %}
+
+
+        <div class="retobloque">
+
+            <a class="rutinasub2" href="{{ path('reto_show',{'id':level.id} )}}">Reto: {{ level.name }}</a><br>
+
+        </div>
+
+
+
+    {% endfor %}
+{% endblock %}

@@ -1,21 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ExerciseController!{% endblock %}
+{% block title %}Hello ExerciseController2!{% endblock %}
 
 {% block body %}
 
 
 
 
-            {% for exercise in exercises %}
+    {% for exercise in exercises %}
+
+        <div class="containerex">
+            <img src="/Imagenes/EJercicios/fondoejercicio.png" class="imgex">
+            <div class="textoencima"><a class="letrasex"><h1>{{ exercise.name}}</h1></a></div>
+            <a href=" {{ exercise.multimedia }}"><img src="/Imagenes/EJercicios/ic_play_circle_outline_48px-512.png" class="buttonex"></a>
 
 
-                <a ><h1>{{ exercise.name}}</h1></a>
 
-                </div>
 
-        {% endfor %}
 
+
+        </div>
+
+
+
+
+
+    {% endfor %}
 
 
 

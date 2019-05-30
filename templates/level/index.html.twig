@@ -5,18 +5,23 @@
 {% block body %}
     <p id="subtitulo">Rutina por Niveles</p>
     {% for level in levels %}
-        <div id="rutinabloque">
-            {% if  level.price  > 0 %}
 
-                <a href="{{ path('level',{'id':level.id} )}}"><h1 style="color: red">{{ level.name }}</h1>
-                    <h2 style="color: red">{{ level.price }}€</h2></a>
+
+            {% if  app.user.level.price >= level.price%}
+                <div class="rutinabloque">
+                <a class="rutinasub" href="{{ path('level',{'id':level.id} )}}"><h1>{{ level.name }}</h1></a>
+
+                </div>
             {% else %}
-                <a  href="{{ path('level',{'id':level.id} )}}"><h1>{{  level.name }}</h1>
-                    <h2>{{ level.price }}€</h2></a>
+            <div class="rutinabloque">
+                <a ><h1 class="rutinasub">{{  level.name }} (Sin Acceso)</h1>
+                    <h2 class="precio">{{ level.price }}€</h2></a>
+                <a class="rutinacceso" href="{{ path('buy_level',{'id':level.id,'user':app.user.id} )}}">Comprar Ya!</a>
+            </div>
             {% endif %}
 
 
-        </div>
+
 
     {% endfor %}
 {% endblock %}

@@ -3,8 +3,9 @@
 {% block title %}Hello PerfilController!{% endblock %}
 
 {% block body %}
-
-    <a href="{{ path('app_perfil_cambiar',{'id':app.user.id} )}}">Configurar mis datos</a>
-    <a href="{{ path('app_mostrar_fav',{'id':app.user.id} )}}">Mis Rutinas</a>
+<div class="datos">
+    <a class="datos1" href="{{ path('app_perfil_cambiar',{'id':app.user.id} )}}">Configurar mis datos</a>
+    <a  class="datos2" href="{{ path('app_mostrar_fav',{'id':app.user.id} )}}">Mis Rutinas</a>
+</div>
     <a></a>
 {% endblock %}

@@ -16,6 +16,7 @@ class PerfilController extends AbstractController
      */
     public function index()
     {
+
         return $this->render('perfil/index.html.twig', [
             'controller_name' => 'PerfilController',
         ]);
@@ -53,6 +54,7 @@ class PerfilController extends AbstractController
      */
     public function mostrarFav(Request $request, $id)
     {
+
         $em = $this->getDoctrine()->getEntityManager();
         $db = $em->getConnection();
 
@@ -69,7 +71,8 @@ WHERE user_routine.user_id = $id; ";
         $levels=$stmt->fetchAll();
 
         return $this->render('perfil/mostrarfav.html.twig', [
-            'levels' => $levels
+            'levels' => $levels,
+
 
         ]);
     }

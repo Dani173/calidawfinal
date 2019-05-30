@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-lg-4 box-form">
+<form method="post"  action="{{ path('app_filtr')}}" >
+    <label>Grupo Muscular que deseas mejorar</label>
+    <select name="carlist1" id="carlist1">
+
+        {% for level in levels %}
+
+            <option value="{{ level.name }}">{{ level.name }}</option>
+
+
+        {% endfor %}
+    </select>
+    <label>Nivel en el cual te consideras</label>
+
+ <select name="carlist" id="carlist" form="carform">
+
+      {% for level2 in levels2 %}
+
+          <option value="{{ level2.name }}">{{ level2.name }}</option>
+
+
+        {% endfor %}
+    </select>
+    <input type="submit" value="Resultados">
+</form>
+
+        <div class="col-lg-4 box-form">
+            <h2>Editar Perfil</h2>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-success" value="Guardar Cambios">
+            <a href="{{ path('app_perfil') }}">Volver al Perfil</a>
+            {{ form_errors(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+

@@ -6,7 +6,9 @@
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Rationale" rel="stylesheet">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.css'>
 
     {% endblock %}
 
@@ -16,16 +18,52 @@
 <div id="menu">
     <div id="menui"><p id="logo"><a id="letra-logo" href="{{ path('app_homepage') }}">CALIDAW</a>
     </div>
-    <div id="menum"><ul>
-            <li id="focus"><a class="letra-menu separacion" href="{{ path('muscle') }}">Ejercicios</a></li>
-            <li><a class="letra-menu separacion" href="{{ path('app_level') }}">Rutinas</a></li>
-            <li><a class="letra-menu separacion" href="{{ path('nutrition') }}">Nutrición</a></li>
-            <li><a class="letra-menu separacion" href="#slide-four">Asesoramiento</a></li>
+    <div id="menum">
+            <nav class="main-nav">
+                <ul>
+            {% if app.user is null %}
+                <li id="focus"><a class="letra-menu separacion menu-link" href="{{ path('muscle') }}">Ejercicios</a></li>
+                <li><a class="letra-menu separacion menu-link" href="{{ path('nutrition') }}">Nutrición</a></li>
+                <li><a class="letra-menu separacion menu-link" href="{{ path('retos') }}">Retos</a></li>
+                <li class="menu-trigger"> <a href="#"><i class="zmdi zmdi-menu"></i></a></li>
+
+            {% else %}
+                <li id="focus"><a class="letra-menu separacion menu-link" href="{{ path('muscle') }}">Ejercicios</a></li>
+                <li><a class="letra-menu separacion menu-link" href="{{ path('nutrition') }}">Nutrición</a></li>
+                <li><a class="letra-menu separacion menu-link" href="{{ path('retos') }}">Retos</a></li>
+                <li><a class="letra-menu separacion menu-link" href="{{ path('app_level') }}">Rutinas</a></li>
+
+                <li class="menu-trigger"> <a href="#"><i class="zmdi zmdi-menu"></i></a></li>
+
+            {% endif %}
         </ul>
+            </nav>
+
     </div>
+    <aside class="menu">
+        <div class="menu-inner">
+            <p class="menu-close"> <a href="#"><i class="zmdi zmdi-close"></i></a></p>
+            <ul class="menu-pages">
+                {% if app.user is null %}
+                <li class="menu-page-link"><a href="{{ path('app_homepage') }}">Inicio</a></li><br>
+                <li class="menu-page-link"><a href="{{ path('muscle') }}">Ejercicios</a></li><br>
+                <li class="menu-page-link"><a href="{{ path('retos') }}">Retos</a></li><br>
+
+                <li class="menu-page-link"><a href="{{ path('nutrition') }}">Nutrición</a></li>
+                {% else %}
+                <li class="menu-page-link"><a href="{{ path('app_homepage') }}">Inicio</a></li><br>
+                <li class="menu-page-link"><a href="{{ path('muscle') }}">Ejercicios</a></li><br>
+                    <li class="menu-page-link"><a href="{{ path('app_level') }}">Rutinas</a></li><br>
+                    <li class="menu-page-link"><a href="{{ path('retos') }}">Retos</a></li><br>
+                <li class="menu-page-link"><a href="{{ path('nutrition') }}">Nutrición</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </aside>
     <div id="menud">
         {% if app.user is null %}
         <button id="login-button" class="inicios" href="{{ path('app_login') }}">Iniciar Sesión</button>
+
         <div class="login-container">
             <form class="login-form" action="{{ path('app_login') }}" method="post">
 
@@ -40,25 +78,19 @@
         <a id="reg-button" class="registro" href="{{ path('app_register') }}" >Registrarse</a>
     </div>
     {% else %}
-        <a class="nav-link" href="{{ path('app_perfil') }}">Perfil</a>
-        <a class="nav-link" href="{{ path('app_logout') }}">Salir</a>
+
+        <a class="registro3" href="{{ path('app_perfil') }}">Perfil {{ app.user.username }}</a>
+        <a class="salir" href="{{ path('app_logout') }}">Salir</a>
     {% endif %}
 </div>
 </div>
+<div class="overlay hide"></div>
 
 {% block body %}{% endblock %}
 <script  src="js/index.js"></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script  src="js/indexx.js"></script>
 
-<footer><div id="debajo">
-        <ul>
-            <li><a class="letra-footer separacionfooter separacion" href="#slide-two">Facebook</a></li>
-            <li><a class="letra-footer separacion" href="#slide-three">Twitter</a></li>
-            <li><a class="letra-footer separacion" href="#slide-four">Pinterest</a></li>
-            <li><a class="letra-footer separacion" href="#slide-four">Instagram</a></li>
-            <li><a class="letra-footer separacion" href="#slide-four">Youtube</a></li>
-        </ul></div></footer>
 
 </div>
 

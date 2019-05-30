@@ -249,14 +249,14 @@ class User implements UserInterface
 
 
 
-    public function setLevel(?Level $level): self
+    public function setLevel(Level $level): self
     {
         $this->level = $level;
 
         return $this;
     }
 
-    public function getLevel(): Collection
+    public function getLevel(): Level
     {
         return $this->level;
     }

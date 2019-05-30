@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Level{% endblock %}
+
+{% block body %}
+    {% for level in levels %}
+
+
+        <a ><h1 id="subtitulo">Compra ya tu nivel {{ level.name  }}</h1></a>
+
+
+        </div>
+
+    {% endfor %}
+    <div id="margin-reg">
+        <div id="registro2">
+            <div class="reg-form">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <input type="submit" class="btn btn-success" value="Comprar Ya">
+        {{ form_errors(form) }}
+        {{ form_end(form) }}
+            </div>
+    </div>
+
+    </div>
+{% endblock %}

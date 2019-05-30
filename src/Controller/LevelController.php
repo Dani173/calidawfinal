@@ -7,9 +7,11 @@ use App\Entity\User;
 use App\Entity\Exercise;
 use App\Entity\Level;
 use App\Entity\Routine;
+use App\Form\BuyLevelType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\Collection;
 
 
 class LevelController extends AbstractController
@@ -19,12 +21,52 @@ class LevelController extends AbstractController
      */
     public function index()
     {
+
         $levels = $this->getDoctrine()->getRepository(Level::class)->findAll();
         return $this->render('level/index.html.twig', [
             'levels' => $levels,
+
         ]);
     }
+    /**
+     * @Route("/comprar/{id}/{user}/level", name="buy_level")
+     */
+    public function buylevel(Request $request, $id,$user)
+    {
 
+
+        $levels = $this->getDoctrine()->getRepository(Level::class)->findBy((array('id' => $id)));
+        $users = $this->getDoctrine()->getRepository(User::class)->find($user);
+        //create the form
+        $form = $this->createForm(BuyLevelType::class, $users);
+        $form->handleRequest($request);
+        $error = $form->getErrors();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($users);
+            $entityManager->flush();
+            $em = $this->getDoctrine()->getEntityManager();
+            $db = $em->getConnection();
+            $query = "UPDATE user
+SET level_id = $id
+WHERE id = $user;
+
+";
+            $stmt = $db->prepare($query);
+            $params = array();
+            $stmt->execute($params);
+
+            return $this->redirectToRoute('app_perfil');
+        }
+
+        return $this->render('level/buylevel.html.twig', [
+            'levels' => $levels,
+            'form' => $form->createView()
+
+
+
+        ]);
+    }
     /**
      * @Route("/level/{id}/show", name="level")
      */
@@ -85,13 +127,18 @@ WHERE routine_id = $id; ";
         $query = "INSERT INTO user_routine (user_id, routine_id)
 VALUES ($user, $id);";
 
-            $stmt = $db->prepare($query);
+        $stmt = $db->prepare($query);
 
         $stmt2 = $db->prepare($query2);
 
-            $params = array();
-        if(($stmt->execute($params)->num_rows)<0){
-            $error="Ya es favorito";
+        $stmt2->execute();
+        $number_of_rows = $stmt2->fetchColumn();
+        $params = array();
+        if($number_of_rows>0){
+
+
+            return $this->redirectToRoute('app_perfil');
+
         }else{
             $stmt->execute($params);
             return $this->redirectToRoute('app_perfil');
@@ -101,13 +148,8 @@ VALUES ($user, $id);";
 
 
 
-
-
-
-
-
-
     }
+
     /**
      * @Route("/level/{id}/{user}/delFav", name="app_del")
      */
@@ -131,4 +173,6 @@ VALUES ($user, $id);";
         return $this->redirectToRoute('app_perfil');
 
     }
+
+
 }
